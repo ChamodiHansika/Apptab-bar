@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'LoginScreen.dart';
+import 'package:quickalert/quickalert.dart';
 
 
 class MyJobs extends StatefulWidget {
@@ -175,6 +176,44 @@ class _MyJobsState extends State<MyJobs> {
                                   width: 3, color: Colors.black),
                             ),
                             child: ListTile(
+                              onTap: () {
+                                showDialog(
+                                  context: context,
+                                  builder: (BuildContext context) {
+                                    return AlertDialog(
+                                      backgroundColor: Colors.indigo[200],
+                                      title: Text(cardDataList[index]['title']),
+                                      content: SingleChildScrollView(
+                                        child: ListBody(
+                                          children: [
+                                            Row(
+                                              children: [
+                                                const Icon(Icons.calendar_today),
+                                                const SizedBox(width: 5),
+                                                Text(cardDataList[index]['date']),
+                                                CircleAvatar(
+                                                  backgroundImage: NetworkImage(
+                                                    cardDataList[index]['imageUrl'],
+                                                  ),
+                                                ),
+                                              ]
+                                            ),
+                                            Text("Description: Inside the app bar create 5 tab bar elements using React JS framework."),
+                                          ],
+                                        ),
+                                      ),
+                                      actions: [
+                                        TextButton(
+                                          onPressed: () {
+                                            Navigator.of(context).pop();
+                                          },
+                                          child: const Text('Close', style: TextStyle(color: Colors.black),),
+                                        ),
+                                      ],
+                                    );
+                                  },
+                                );
+                              },
                               title: Text(
                                 cardDataList[index]['title'],
                                 textAlign: TextAlign.left,
